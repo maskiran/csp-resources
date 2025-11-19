@@ -1,0 +1,17 @@
+{
+  "aws_profiles": [
+    "profile1",
+    "profile2",
+    "profile3"
+  ],
+  "azure_subs": [
+    "subscription1",
+    "subscription2",
+    "subscription3"
+  ],
+  "gcp_projects": [
+    "project1",
+    "project2",
+    "project3"
+  ]
+}
