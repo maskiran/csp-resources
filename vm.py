@@ -40,14 +40,22 @@ Usage examples:
 import argparse
 import logging
 import sys
+from pathlib import Path
 
 from tabulate import tabulate
 
 from csp import vm as csp_vm
-from utils import find_items_by_identifier, load_from_json, process_identifiers_input, save_to_json, truncate_account_name, save_to_excel, setup_logging, log_discovery_stats, get_inventory_path
+from utils import (find_items_by_identifier, get_inventory_path, load_from_json,
+                   log_discovery_stats, process_identifiers_input,
+                   save_to_excel, save_to_json, setup_logging, truncate_account_name)
 
 logger = logging.getLogger(__name__)
 
+RESOURCE_TYPE = 'vm'
+
+# Define constants for inventory file paths
+INVENTORY_JSON_PATH: Path = get_inventory_path(RESOURCE_TYPE, 'json')
+INVENTORY_XLSX_PATH: Path = get_inventory_path(RESOURCE_TYPE, 'xlsx')
 
 def prepare_vm_table_data(vms: list[dict]) -> list[list]:
     """Prepare VM data for Excel export."""
@@ -194,8 +202,8 @@ def refresh():
     # Log discovery stats
     log_discovery_stats(result['stats'], 'VM')
 
-    save_to_json(result['items'], str(get_inventory_path('vm', 'json')))
-    save_vms_to_excel(result['items'], str(get_inventory_path('vm', 'xlsx')))
+    save_to_json(result['items'], str(INVENTORY_JSON_PATH))
+    save_vms_to_excel(result['items'], str(INVENTORY_XLSX_PATH))
 
 
 def main():
@@ -212,7 +220,7 @@ def main():
 
     # For all other operations, we need to work with the inventory
     # Step 1: Load all VMs
-    target_vms = load_from_json(str(get_inventory_path('vm', 'json')))
+    target_vms = load_from_json(str(INVENTORY_JSON_PATH))
 
     # Step 2: Apply filters sequentially (each filter operates on the current selection)
     # Track if any filter was applied (for safety check on delete)

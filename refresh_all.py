@@ -35,8 +35,8 @@ def main() -> None:
 
     print("\n=== Refresh Complete ===")
     print(f"\nInventory files updated in the 'inventory/' directory:")
-    print(f"  - {vm.INVENTORY_FILE_NAME}.json & {vm.INVENTORY_FILE_NAME}.xlsx")
-    print(f"  - {vpc.INVENTORY_FILE_NAME}.json & {vpc.INVENTORY_FILE_NAME}.xlsx")
+    print(f"  - {vm.INVENTORY_JSON_PATH.name} & {vm.INVENTORY_XLSX_PATH.name}")
+    print(f"  - {vpc.INVENTORY_JSON_PATH.name} & {vpc.INVENTORY_XLSX_PATH.name}")
     print(f"\nTotal time: {format_duration(total_time)}\n")
 
 
